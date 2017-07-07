@@ -13,23 +13,19 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase {
    protected $excelFile;
    protected $calculator;
    protected $excelMappings = array(
-       'Module Height'    => 'C5',
-       'Module Width'     => 'C6',
-       'Module Thickness' => 'C7',
-       'Module Weight'    => 'C8',
-       'Length of System' => 'C41',
-       'Roof Design'      => 'C26',
-       'Roof Slope'       => 'C23',
-       'Wind Speed'       => 'C12',
-       'Terrain Category' => 'C14',
-       'Importance Category' => 'C16',
-       'Ground Snow Load'    => 'C13', 
-       'Rows'                => 'C35',
-       'Columns'             => 'C36',
-       'Module Orientation'  => 'C30',
-       'Total System Weight' => 'C49', 
-       'Building Height'     => 'C25',
-   );
+       'Module Height'    => 'C8',
+       'Module Width'     => 'C10',
+       'Module Orientation' => 'C9',
+        'Module Rows'=> 'C12',
+        'Support Span' => 'C13' ,
+        'Module Angle'=> 'C14',
+        'Dead Load, Min' => 'C15',
+        'Dead Load, Max' => 'C16' ,
+        'ASCE' => 'C19',
+        'Wind Speed' => 'C20',
+        'Ground Snow Load' => 'C21' ,
+        'Exposure Category' => 'C22' ,
+        'Risk Category' => 'C23');
    
    protected $calculatorMappings = array(
        'Module Height'    => 'moduleHeightInMm',
@@ -53,27 +49,23 @@ class CalculatorTest extends \PHPUnit_Framework_TestCase {
    );
    
    public function setUp() {
-      $this->excelFile = \PHPExcel_IOFactory::load('excel/Residential Calc New (04-24-2013).xlsx');
+      $this->excelFile = \PHPExcel_IOFactory::load('MultiSpan Beam Calculator_Vb.xlsx');
       $this->calculator = new Calculator();
    }
    
    public function testPhoenixProject() { 
       $inputs = array(
+          'Module Orientation' => "Portrait",
           'Module Height'    => 1675,
           'Module Width'     => 1001,
-          'Module Thickness' => 50,
-          'Module Weight'    => 27,
-          'Roof Design'      => 1,
-          'Roof Slope'       => 1,
-          'Wind Speed'       => 90,
-          'Terrain Category' => 1,
-          'Importance Category' => 1,
-          'Ground Snow Load'    => 10,
-          'Rows'                => 2,
-          'Columns'             => 4,
-          'Module Orientation'  => TRUE,
-          'Building Height'     => 20,
-      );
+          'Module Columns' => 50,
+          'Module Row'    => 27,
+          'Support Span'      => 1,
+          'Module Angle'       => 1,
+         'Dead Load, Min'
+=>1.75    ,
+"Dead Load, Max" => 3.00  );
+
       $this->setExcelInputs($inputs);
       print_r($this->calculate($inputs));
       
