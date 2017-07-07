@@ -1,9 +1,8 @@
 <?php
 
 require('vendor/autoload.php');
-require('../includes/constants.php');
-$calculatorTesting = true; // hack the untestability of the calculator.
-require('../includes/class.calculator.php');
+
+
 
 /**
  * Tests of Schletter core calculator class
